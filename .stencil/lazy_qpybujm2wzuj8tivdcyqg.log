@@ -1,0 +1,154 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from "@stencil/core";
+import { css } from 'emotion';
+import Fragment from 'stencil-fragment';
+import { GlobalStyleSheet } from '../../shared/styles';
+import { COLORS, TYPOGRAPHY, SPACING, MEDIA_QUERIES, Margins, LargeScreen, SmallScreen, LINK_STYLES, Z_SPACE, } from '../../shared/styles';
+export const UniversalHeader = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.isOpen = false;
+    }
+    transformData(data) {
+        return {
+            primary: data.filter(item => item.level === "1"),
+            secondary: data.filter(item => item.level === "2")
+        };
+    }
+    handleClick(event) {
+        // isOpen = ! isOpen;
+        this.isOpen = !this.isOpen;
+    }
+    render() {
+        let container;
+        let items;
+        let styles = { linkLink: null, container: null, content: null, headerSpan: null, sitesButton: null, sitesContainer: null, overlay: null, sitesLede: null, linksContainer: null, linkItem: null, linkDescription: null, loadingContainer: null };
+        let linkss = { special: null, listStrong: null };
+        linkss.special = css(LINK_STYLES['special']);
+        linkss.listStrong = css(LINK_STYLES['links-strong']);
+        styles.linkLink = css(Object.assign(LINK_STYLES['list-strong'], {
+            display: 'block',
+            padding: SPACING['M'],
+            ':hover': {
+                boxShadow: 'none'
+            },
+            ':hover span': LINK_STYLES['list-strong'][':hover'],
+            [MEDIA_QUERIES.LARGESCREEN]: {
+                display: 'inline',
+                padding: '0'
+            }
+        }));
+        styles.container = css({
+            background: COLORS.blue[100],
+            width: '100%'
+        });
+        styles.content = css({
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: `${SPACING['2XS']} 0`
+        });
+        styles.headerSpan = css(Object.assign(Object.assign({}, TYPOGRAPHY['3XS']), { color: COLORS.neutral[300] }));
+        styles.sitesButton = css(Object.assign(Object.assign({}, LINK_STYLES['special']), { ':hover': {
+                'span': LINK_STYLES['special'][':hover']
+            } }));
+        styles.sitesContainer = css({
+            display: 'inline-block',
+            position: 'relative'
+        });
+        styles.overlay = css(Object.assign(Object.assign({ background: 'white', zIndex: '10', position: `absolute`, left: `auto`, right: `0`, marginLeft: SPACING['XL'], marginBottom: SPACING['L'], padding: '0', borderRight: '0', width: '20rem', marginRight: `-${SPACING['M']}` }, Z_SPACE[8]), { [MEDIA_QUERIES.LARGESCREEN]: {
+                marginRight: '0',
+                padding: SPACING['XL'],
+                width: `862px`,
+                maxWidth: `calc(100vw - ${SPACING['2XL']} * 2)`,
+            } }));
+        styles.sitesLede = css({
+            display: 'none',
+            [MEDIA_QUERIES.LARGESCREEN]: Object.assign(Object.assign({ display: 'block' }, TYPOGRAPHY['L']), { padding: 0, marginBottom: SPACING['L'] })
+        });
+        styles.linksContainer = css({
+            [MEDIA_QUERIES.LARGESCREEN]: {
+                'ul:first-of-type': {
+                    marginBottom: SPACING['M']
+                },
+                display: 'flex',
+                justifyContent: 'space-between',
+                'ul:last-of-type': {
+                    minWidth: '16rem',
+                    margin: '0',
+                    marginLeft: SPACING['XL'],
+                    paddingLeft: SPACING['XL'],
+                    borderLeft: `solid 1px ${COLORS.neutral[100]}`,
+                    'li': {
+                        marginBottom: SPACING['S'],
+                    }
+                }
+            },
+            'ul:last-of-type li:last-of-type': {
+                border: 'none'
+            }
+        });
+        styles.linkItem = css({
+            borderBottom: `solid 1px ${COLORS.neutral[100]}`,
+            [MEDIA_QUERIES.LARGESCREEN]: {
+                border: 'none',
+                position: 'relative',
+                maxWidth: '32rem',
+                ':not(:last-child)': {
+                    marginBottom: '1rem'
+                }
+            }
+        });
+        styles.linkDescription = css({
+            display: 'none',
+            color: COLORS.neutral['300'],
+            [MEDIA_QUERIES.LARGESCREEN]: {
+                display: 'block'
+            }
+        });
+        styles.loadingContainer = css({
+            borderBottom: `solid 1px ${COLORS.neutral[100]}`,
+            [MEDIA_QUERIES.LARGESCREEN]: {
+                border: 'none',
+                position: 'relative',
+                maxWidth: '32rem',
+                ':not(:last-child)': {
+                    marginBottom: '1rem'
+                }
+            }
+        });
+        GlobalStyleSheet();
+        function HeaderContainer({ children }) {
+            return (h("header", { class: styles.container, "aria-label": "WHAT IS EVEN HAPPENING?" }, children));
+        }
+        function HeaderContent() {
+            h("div", { class: styles.content });
+        }
+        function HeaderMargins() {
+            return (h("div", { class: Margins }));
+        }
+        function UMichLibraryLink() {
+            //LINK_STYLES
+            return (h(Fragment, null, h("div", { class: LargeScreen }, h("a", { class: linkss.special, href: "https://www.lib.umich.edu/" }, "University of Michigan Library")), h("div", { class: SmallScreen }, h("a", { class: linkss.special, href: "https://www.lib.umich.edu/" }, h("abbr", { title: "University of Michigan" }, "U-M"), " Library")), h("div", { class: styles.sitesContainer }, h("button", { class: styles.sitesButton }, h("span", null, "Explore")))));
+            // return (
+            //   <Fragment>
+            //     <LargeScreen>
+            //       <HomeLink>University of Michigan Library</HomeLink>
+            //     </LargeScreen>
+            //     <SmallScreen>
+            //       <HomeLink><abbr title="University of Michigan">U-M</abbr> Library</HomeLink>
+            //     </SmallScreen>
+            //   </Fragment>
+            // )
+        }
+        function Sites() {
+            return (h("br", null));
+        }
+        // return (
+        //   <header class={styles.container} aria-label="View our other U-M Library sites">
+        //     <UMichLibraryLink />
+        //   </header>
+        // );
+        return (h(HeaderContainer, { "aria-label": "View our other U-M Library sites" }, h(HeaderMargins, null, h(HeaderContent, null, h(UMichLibraryLink, null), h(Sites, null)))));
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:umichlib-universal-header"; }
+};

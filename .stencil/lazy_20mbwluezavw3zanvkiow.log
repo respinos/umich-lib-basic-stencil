@@ -1,0 +1,20 @@
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+export const UniversalHeader = class {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:umichlib-universal-header"; }
+};
+function transformData(data) {
+    return {
+        primary: data.filter(item => item.level === "1"),
+        secondary: data.filter(item => item.level === "2")
+    };
+}
+function handleClick(event) {
+    isOpen = !isOpen;
+}
+render();
+{
+    return (h(Host, null, h("slot", null)));
+}
